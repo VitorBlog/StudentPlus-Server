@@ -71,5 +71,6 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.26" level="project" />
     <orderEntry type="library" name="commons-codec-1.11" level="project" />
     <orderEntry type="library" name="jsoup-1.12.1" level="project" />
+    <orderEntry type="library" name="SimpleJSON" level="project" />
   </component>
 </module>

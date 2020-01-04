@@ -8,9 +8,11 @@ import org.json.simple.parser.JSONParser
 import java.text.SimpleDateFormat
 
 class StudentProcess {
-    val jsonParser = JSONParser()
-    val subjectProcess = SubjectProcess()
-    val reportProcess = ReportProcess()
+    private val jsonParser = JSONParser()
+    private val subjectProcess = SubjectProcess()
+    private val reportProcess = ReportProcess()
+    private val scheduleProcess = ScheduleProcess()
+    private val menuProcess = MenuProcess()
 
     fun load(id:String):Student?{
         val studentInfoResponse = APIRequester.request(Point.GET_STUDENT_INFO, "{\"AlunoCod\": $id}")
@@ -19,7 +21,9 @@ class StudentProcess {
 
         val subjects = subjectProcess.load(id, studentInfoJSON.getString("AlunoDataNasc"))
         val report = reportProcess.load(id)
-        val school = School(studentInfoJSON.getString("UeCod"), studentInfoJSON.getString("UeNom").formatName().replace("eeb", "EEB", true), School.Location(studentInfoJSON.getString("UeMunNom"), "${studentInfoJSON.getString("UeEnd").formatName()}, ${studentInfoJSON.getString("UeNumEnd")}", studentInfoJSON.getString("UeLatitude"), studentInfoJSON.getString("UeLongitude")))
+        val schedule = scheduleProcess.load(id)
+        val menu = menuProcess.load(id)
+        val school = School(studentInfoJSON.getString("UeCod"), studentInfoJSON.getString("UeNom").formatName().replace("eeb", "EEB", true), School.Location(studentInfoJSON.getString("UeMunNom"), "${studentInfoJSON.getString("UeEnd").formatName()}, ${studentInfoJSON.getString("UeNumEnd")}", studentInfoJSON.getString("UeLatitude"), studentInfoJSON.getString("UeLongitude")), schedule, menu)
 
         return Student(id, studentInfoJSON.getString("AlunoNom").formatName(), studentInfoJSON.getString("AlunoDataNasc"), subjects, report, school)
     }
