@@ -23,10 +23,13 @@ class ReportProcess {
             val name = subject.getString("DisciplinaNome").formatName()
 
             for (i in 1..3){
+                val grade = subject.getLong("Nota$i").toDouble()
+                val absence = subject.getLong("Falta$i").toInt()
+
                 when (i) {
-                    1 -> first.add(ReportGrade(name, subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
-                    2 -> second.add(ReportGrade(name, subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
-                    3 -> third.add(ReportGrade(name, subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    1 -> first.add(ReportGrade(name, grade, absence))
+                    2 -> second.add(ReportGrade(name,grade, absence))
+                    3 -> third.add(ReportGrade(name, grade, absence))
                 }
             }
         }
