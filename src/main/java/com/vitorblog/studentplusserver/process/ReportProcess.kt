@@ -20,12 +20,13 @@ class ReportProcess {
 
         for (sub in reportJSON.getArray("NotaFaltaDisciplina")){
             val subject = sub as JSONObject
+            val name = subject.getString("DisciplinaNome").formatName()
 
             for (i in 1..3){
                 when (i) {
-                    1 -> first.add(ReportGrade(subject.getString("DisciplinaNome").formatName(), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
-                    2 -> second.add(ReportGrade(subject.getString("DisciplinaNome").formatName(), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
-                    3 -> third.add(ReportGrade(subject.getString("DisciplinaNome").formatName(), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    1 -> first.add(ReportGrade(name, subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    2 -> second.add(ReportGrade(name, subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    3 -> third.add(ReportGrade(name, subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
                 }
             }
         }
