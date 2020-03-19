@@ -10,7 +10,7 @@ open class Main {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            SpringApplication.run(Main::class.java, *args)
+            SpringApplication.run(Main::class.java, "")
         }
 
     }
