@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 class StudentController {
-    val objectMapper = ObjectMapper()
+    private val objectMapper = ObjectMapper()
 
     @GetMapping("/student/{id}")
     @ResponseBody
