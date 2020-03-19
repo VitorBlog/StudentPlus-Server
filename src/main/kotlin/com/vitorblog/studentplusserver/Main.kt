@@ -1,5 +1,6 @@
 package com.vitorblog.studentplusserver
 
+import com.vitorblog.studentplusserver.process.ConfigProcess
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
@@ -10,6 +11,8 @@ open class Main {
 
         @JvmStatic
         fun main(args: Array<String>) {
+            ConfigProcess().load()
+
             SpringApplication.run(Main::class.java, "")
         }
 
