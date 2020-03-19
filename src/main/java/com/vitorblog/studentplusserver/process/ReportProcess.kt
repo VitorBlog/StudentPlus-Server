@@ -3,6 +3,7 @@ package com.vitorblog.studentplusserver.process
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.vitorblog.studentplusserver.model.*
 import com.vitorblog.studentplusserver.requester.APIRequester
+import com.vitorblog.studentplusserver.utils.StringUtils
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import java.text.SimpleDateFormat
@@ -23,25 +24,14 @@ class ReportProcess {
 
             for (i in 1..3){
                 when (i) {
-                    1 -> first.add(ReportGrade(subject.getString("DisciplinaNome").formatName(), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
-                    2 -> second.add(ReportGrade(subject.getString("DisciplinaNome").formatName(), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
-                    3 -> third.add(ReportGrade(subject.getString("DisciplinaNome").formatName(), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    1 -> first.add(ReportGrade(StringUtils.formatName(subject.getString("DisciplinaNome")), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    2 -> second.add(ReportGrade(StringUtils.formatName(subject.getString("DisciplinaNome")), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
+                    3 -> third.add(ReportGrade(StringUtils.formatName(subject.getString("DisciplinaNome")), subject.getLong("Nota$i").toDouble(), subject.getLong("Falta$i").toInt()))
                 }
             }
         }
 
         return Report(first, second, third)
-    }
-
-    fun String.formatName():String {
-        val split = this.split(" ")
-        var fullName = ""
-
-        for (name in split){
-            fullName += " ${name.substring(0, 1).toUpperCase()}${name.substring(1).toLowerCase()}"
-        }
-
-        return fullName.substring(1)
     }
 
 }

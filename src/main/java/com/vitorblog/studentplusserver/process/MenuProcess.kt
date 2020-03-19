@@ -8,7 +8,7 @@ import org.json.simple.parser.JSONParser
 import java.text.SimpleDateFormat
 
 class MenuProcess {
-    val jsonParser = JSONParser()
+    private val jsonParser = JSONParser()
 
     fun load(id:String):ArrayList<MenuItem> {
         var menuList = arrayListOf<MenuItem>()
