@@ -4,24 +4,20 @@ import com.vitorblog.studentplusserver.model.Point
 import java.net.HttpURLConnection
 import java.net.URL
 
-class APIRequester {
+object APIRequester {
 
-    companion object {
+    fun request(point:Point, data:String):String{
+        val url = URL(point.url)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.setRequestProperty("Content-type", "application/json")
+        connection.requestMethod = "POST"
+        connection.doOutput = true
 
-        fun request(point:Point, data:String):String{
-            val url = URL(point.url)
-            val connection = url.openConnection() as HttpURLConnection
-            connection.setRequestProperty("Content-type", "application/json")
-            connection.requestMethod = "POST"
-            connection.doOutput = true
+        connection.outputStream.write(data.toByteArray())
+        connection.outputStream.flush()
+        connection.outputStream.close()
 
-            connection.outputStream.write(data.toByteArray())
-            connection.outputStream.flush()
-            connection.outputStream.close()
-
-            return connection.inputStream.reader().readText()
-        }
-
+        return connection.inputStream.reader().readText()
     }
 
 }
